@@ -1,78 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <title>To the Power of Math!</title>
-    <!-- Styling for the client UI -->
-    <style>
-    h1 {
-        color: #FFFFFF;
-        font-family: system-ui;
-		margin-left: 20px;
-        }
-	body {
-        background-color: #222629;
-        }
-    label {
-        color: #86C232;
-        font-family: system-ui;
-        font-size: 20px;
-        margin-left: 20px;
-		margin-top: 20px;
-        }
-     button {
-        background-color: #86C232;
-		border-color: #86C232;
-		color: #FFFFFF;
-        font-family: system-ui;
-        font-size: 20px;
-		font-weight: bold;
-        margin-left: 30px;
-		margin-top: 20px;
-		width: 140px;
-        }
-	 input {
-        color: #222629;
-        font-family: system-ui;
-        font-size: 20px;
-        margin-left: 10px;
-		margin-top: 20px;
-		width: 100px;
-        }
-    </style>
-    <script>
-        // callAPI function that takes the base and exponent numbers as parameters
-        var callAPI = (base,exponent)=>{
-            // instantiate a headers object
-            var myHeaders = new Headers();
-            // add content type header to object
-            myHeaders.append("Content-Type", "application/json");
-            // using built in JSON utility package turn object to string and store in a variable
-            var raw = JSON.stringify({"base":base,"exponent":exponent});
-            // create a JSON object with parameters for API call and store in a variable
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            // make API call with parameters and use promises to get response
-            fetch("YOUR API GATEWAY ENDPOINT", requestOptions)
-            .then(response => response.text())
-            .then(result => alert(JSON.parse(result).body))
-            .catch(error => console.log('error', error));
-        }
-    </script>
+    <title>Math Calculator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
 </head>
+
 <body>
-    <h1>TO THE POWER OF MATH!</h1>
-	<form>
+    <h1>BIGGGG NUMBER Math Calculator</h1>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <button onclick="clearDisplay()">C</button>
+        <div class="buttons">
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="appendOperator('+')">+</button>
+            <button onclick="appendOperator('-')">-</button>
+            <button onclick="appendOperator('*')">*</button>
+            <button onclick="appendOperator('/')">/</button>
+            <button onclick="appendOperator('^')">^</button>
+            <button onclick="calculate()">=</button>
+        </div>
+    </div>
+    <div class="file">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label>Select number file to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload File" name="submit" onclick="validateForm()">
+            <p id="error" style="color: red;"></p>
+        </form>
+    </div>
+    
+    <!-- <form>
         <label>Base number:</label>
         <input type="text" id="base">
         <label>...to the power of:</label>
         <input type="text" id="exponent">
-        <!-- set button onClick method to call function we defined passing input values as parameters -->
-        <button type="button" onclick="callAPI(document.getElementById('base').value,document.getElementById('exponent').value)">CALCULATE</button>
-    </form>
+        set button onClick method to call function we defined passing input values as parameters
+        <button type="button"
+            onclick="callAPI(document.getElementById('base').value,document.getElementById('exponent').value)">CALCULATE</button>
+    </form> -->
 </body>
+
 </html>
