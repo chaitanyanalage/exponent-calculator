@@ -54,7 +54,7 @@ function calculate() {
                 result = operand / parseFloat(currentInput);
                 break;
             case '^':
-                result = operand ^ parseFloat(currentInput);
+                result = operand ** parseInt(currentInput);
                 break;
         }
         document.getElementById('display').value = result;
