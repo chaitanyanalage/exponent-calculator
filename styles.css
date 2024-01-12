@@ -61,13 +61,10 @@ input {
 
 
 #display {
-    width: 100%;
+    width: 500%;
     height: 50px;
     border: none;
     outline: none;
-    text-align: right;
-    padding-right: 500px;
-    font-size: 24px;
 }
 
 .buttons {
