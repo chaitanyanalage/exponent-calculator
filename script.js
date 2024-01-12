@@ -9,19 +9,19 @@ async function callAPI (operand, other, operator) {
     var raw;
     switch (operator) {
         case '+':
-            raw = JSON.stringify({ "first": operand, "second": other, "operator": "add" });
+            raw = JSON.stringify({ "first": operand, "second": other, "operator": "+" });
             break;
         case '-':
-            raw = JSON.stringify({ "first": operand, "second": other, "operator": "subtract" });
+            raw = JSON.stringify({ "first": operand, "second": other, "operator": "-" });
             break;
         case '*':
-            raw = JSON.stringify({ "first": operand, "second": other, "operator": "multiply" });
+            raw = JSON.stringify({ "first": operand, "second": other, "operator": "*" });
             break;
         case '/':
-            raw = JSON.stringify({ "first": operand, "second": other, "operator": "divide" });
+            raw = JSON.stringify({ "first": operand, "second": other, "operator": "/" });
             break;
         case '^':
-            raw = JSON.stringify({ "first": operand, "second": other, "operator": "power" });
+            raw = JSON.stringify({ "first": operand, "second": other, "operator": "^" });
             break;
     }
     // create a JSON object with parameters for API call and store in a variable
@@ -33,9 +33,7 @@ async function callAPI (operand, other, operator) {
     };
     // make API call with parameters and use promises to get response
     try {
-        let response = await fetch("YOUR API GATEWAY ENDPOINT", requestOptions);
-        let data = await response.text();
-        return data;
+        return fetch("https://41s3dc0al9.execute-api.us-east-2.amazonaws.com/dev/", requestOptions).then(response => response.json()).then(result => result.body).catch(error => console.log('error', error));
     } catch (error) {
         console.log('error', error);
     }
