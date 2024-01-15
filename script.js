@@ -1,10 +1,6 @@
-// callAPI function that takes the base and exponent numbers as parameters
 async function callAPI (operand, other, operator) {
-    // instantiate a headers object
     var myHeaders = new Headers();
-    // add content type header to object
     myHeaders.append("Content-Type", "application/json");
-    // using built in JSON utility package turn object to string and store in a variable
 
     var raw;
     switch (operator) {
@@ -24,14 +20,12 @@ async function callAPI (operand, other, operator) {
             raw = JSON.stringify({ "first": operand, "second": other, "operator": "^" });
             break;
     }
-    // create a JSON object with parameters for API call and store in a variable
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
-    // make API call with parameters and use promises to get response
     try {
         return fetch("https://41s3dc0al9.execute-api.us-east-2.amazonaws.com/dev/", requestOptions).then(response => response.json()).then(result => result.body).catch(error => console.log('error', error));
     } catch (error) {
@@ -58,7 +52,6 @@ function appendOperator(op) {
 
 async function calculate() {
     var display = document.getElementById('display');
-    // temporary: but we move this over to the API
     if (operator !== null) {
         let result;
         switch (operator) {
@@ -80,7 +73,6 @@ async function calculate() {
         }
 
         display.value = result;
-        // display.style.fontSize = (display.value.length > 10) ? '18px' : '24px';
         currentInput = '' + result;
         operator = null;
     }
